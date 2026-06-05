@@ -44,7 +44,6 @@ def updateGood(request, pk):
     return Response(serializer.data)
 
 @api_view(['GET'])
-
 def getGoodsById(request, pk):
     good = get_object_or_404(Goods, id=pk)
     try:
