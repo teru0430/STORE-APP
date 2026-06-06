@@ -180,7 +180,8 @@ SIMPLE_JWT = {
 
 STATIC_URL = 'static/'
 
-CORS_ORIGIN_WHITELIST = [
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
     
 ]
 
