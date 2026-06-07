@@ -11,16 +11,23 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import os
+
+env = environ.Env(
+    
+    DEBUG=(bool, False)
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z17x+hs_qwflneec676wenc%z29zuojcxhx+q5aws8efulfy05'
+SECRET_KEY=env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,7 +90,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -121,7 +128,8 @@ USE_TZ = True
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+       # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'mysite.authentication.JWTCookieAuthentication', 
     )
 }
 
@@ -130,11 +138,20 @@ from datetime import timedelta
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": False,
     "UPDATE_LAST_LOGIN": False,
+    
+    
+    "AUTH_COOKIE": "access_token",          # ブラウザに保存されるCookieの名前
+    "AUTH_COOKIE_REFRESH": "refresh_token",  # リフレッシュトークンの名前
+    "AUTH_COOKIE_HTTP_ONLY": True,          # JSから読めなくする（超重要：XSS対策）
+    "AUTH_COOKIE_PATH": "/",                # Cookieが有効なURL範囲
+    "AUTH_COOKIE_SAMESITE": "Lax",          # CSRF対策
+    # "AUTH_COOKIE_SECURE": True,           # 本番環境(HTTPS)にする時はコメントアウトを外す
+
 
     "ALGORITHM": "HS256",
     "SIGNING_KEY": SECRET_KEY,
@@ -174,6 +191,7 @@ SIMPLE_JWT = {
     "REVOKE_TOKEN_CLAIM": "hash_password",
     "CHECK_USER_IS_ACTIVE": True,
 }
+CORS_ALLOW_CREDENTIALS = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
@@ -184,7 +202,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     
 ]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+]
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

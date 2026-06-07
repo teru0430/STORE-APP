@@ -3,20 +3,58 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
+import axios from 'axios'
+
 
 function App() {
   const [count, setCount] = useState(0)
 
-  useEffect(()=> {
-    const getGoods = async () =>{
-      const res = await fetch('http://127.0.0.1:8000/accounts/me/',{headers:{
-        'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzgwNzQ1NjAwLCJpYXQiOjE3ODA3NDUzMDAsImp0aSI6IjFlNDA5NGM5ZTM5OTQ4ZWY5ZDU4ZTc3MWUxMWQ2ZTdjIiwidXNlcl9pZCI6IjEifQ.fj3RYB7-6JFckozh8vHnisWQGOeX66w70wltWFDX5Do`
-      }});
-      const data = await res.json();
-      console.log(data);
-    }
-    getGoods()
-  },[]);
+  // useEffect(()=> {
+  //   const getMe = async () =>{
+  //     const res = await fetch('http://127.0.0.1:8000/accounts/me/',{headers:{
+  //       'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzgwNzQ1NjAwLCJpYXQiOjE3ODA3NDUzMDAsImp0aSI6IjFlNDA5NGM5ZTM5OTQ4ZWY5ZDU4ZTc3MWUxMWQ2ZTdjIiwidXNlcl9pZCI6IjEifQ.fj3RYB7-6JFckozh8vHnisWQGOeX66w70wltWFDX5Do`
+  //     }});
+  //     const data = await res.json();
+  //     console.log(data);
+  //   }
+  //   getMe()
+  // },[]);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  axios.defaults.withCredentials = true;
+
+  // useEffect(() => {
+  //   // useEffectの直後に直接 async をつけるのはNGなため、内部で関数を作ります
+  //   const fetchUsers = async () => {
+  //     try {
+  //       const response = await axios.post('http://localhost:8000/api/token/',{"username": "admin",
+  //   "password": "wasd0123"});
+  //       setUsers(response.data); // 成功時にデータをセット
+  //       console.log('ログイン成功',response.data)
+  //     } catch (error) {
+  //       console.error('データ取得に失敗しました:', error); // エラー処理
+  //     } finally {
+  //       setLoading(false); // 成功・失敗に関わらずローディングを終了
+  //     }
+  //   };
+
+  //   fetchUsers();
+  // }, []);
+
+  // if (loading) return <div>ロード中...</div>;
+
+  async function getSecretData() {
+  try {
+    // 👈 ヘッダーの設定なしで、そのままGETリクエストを送る
+    const response = await axios.get('http://localhost:8000/api/secret/');
+    
+    // クッキーの中のトークンが自動でDjangoに届き、認証が成功する！
+    console.log('秘密のデータ:', response.data);
+  } catch (error) {
+    console.error('アクセス拒否されました（未ログインなど）:', error);
+  }
+  }
+  getSecretData()
   return (
     <>
       <section id="center">
