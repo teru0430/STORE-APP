@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
-import axios from 'axios'
+import axios from 'axios';
+import api from './api';
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  axios.defaults.withCredentials = true
 
   // useEffect(()=> {
   //   const getMe = async () =>{
@@ -19,15 +17,14 @@ function App() {
   //   }
   //   getMe()
   // },[]);
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  axios.defaults.withCredentials = true;
-
+  // const [users, setUsers] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  // axios.defaults.withCredentials = true;
   // useEffect(() => {
   //   // useEffectの直後に直接 async をつけるのはNGなため、内部で関数を作ります
   //   const fetchUsers = async () => {
   //     try {
-  //       const response = await axios.post('http://localhost:8000/api/token/',{"username": "admin",
+  //       const response = await axios.post('http://localhost:8000/api/token/',{"username": "banana",
   //   "password": "wasd0123"});
   //       setUsers(response.data); // 成功時にデータをセット
   //       console.log('ログイン成功',response.data)
@@ -43,128 +40,73 @@ function App() {
 
   // if (loading) return <div>ロード中...</div>;
 
-  async function getSecretData() {
-  try {
-    // 👈 ヘッダーの設定なしで、そのままGETリクエストを送る
-    const response = await axios.get('http://localhost:8000/api/secret/');
+  // async function getSecretData() {
+  // try {
+  //   //  ヘッダーの設定なしで、そのままGETリクエストを送る
+  //   const response = await axios.get('http://localhost:8000/api/secret/');
     
-    // クッキーの中のトークンが自動でDjangoに届き、認証が成功する！
-    console.log('秘密のデータ:', response.data);
-  } catch (error) {
-    console.error('アクセス拒否されました（未ログインなど）:', error);
+  //   // クッキーの中のトークンが自動でDjangoに届き、認証が成功する！
+  //   console.log('秘密のデータ:', response.data);
+  // } catch (error) {
+  //   console.error('アクセス拒否されました（未ログインなど）:', error);
+  // }
+  // }
+  // getSecretData()
+
+    // 1. 画面の状態を管理する3つの箱（State）を用意
+  const [data, setData] = useState(null);         // 取得したデータをいれる箱
+  const [isLoading, setIsLoading] = useState(true); // ローディング中かどうかのフラグ
+  const [error, setError] = useState(null);       // エラーをいれる箱
+
+  // 2. データを取得する関数
+  const loadSecretData = async () => {
+    try {
+      setIsLoading(true); // 通信開始時にローディングをONにする
+      
+      const response = await api.get('/api/secret/');
+
+      const res = await api.get('/goods/');
+      
+      setData(response.data); // データを箱にいれる
+      console.log(response.data,res.data)
+      setError(null);         // エラーをクリア
+    } catch (err) {
+      // リフレッシュすら失敗して、完全にログイン期限が切れた場合はここに飛ぶ
+      setError(err.response?.data?.message || err.message);
+    } finally {
+      setIsLoading(false); // 成功・失敗に関わらず通信が終わったらローディングをOFFにする
+    }
+  };
+
+  // 3. 画面が読み込まれた瞬間に、1回だけデータ取得関数を実行する
+  useEffect(() => {
+    loadSecretData();
+  }, []); // 空の配列を入れることで「初回のみ実行」になる
+
+  // 4. 通信中の画面表示
+  if (isLoading) {
+    return <div>データを読み込み中...</div>;
   }
+
+  // 5. エラーが起きた場合の画面表示
+  if (error) {
+    return (
+      <div style={{ color: 'red' }}>
+        エラーが発生しました: {error}
+      </div>
+    );
   }
-  getSecretData()
+
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+    
+      <h1>
+        test
+      </h1>
+    
+    
     </>
-  )
+  );
 }
 
 export default App

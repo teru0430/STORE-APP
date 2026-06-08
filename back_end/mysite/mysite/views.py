@@ -1,10 +1,14 @@
 # views.py
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.conf import settings
+from django.http import JsonResponse
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken
+
 
 class CookieTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
@@ -67,30 +71,47 @@ class SecretDataView(APIView):
 
 
 class CookieTokenRefreshView(TokenRefreshView):
-    """
-    Cookieからリフレッシュトークンを読み取り、
-    新しく生成されたアクセストークンを再びCookieにセットして返すビュー
-    """
+    
     def post(self, request, *args, **kwargs):
-        # 1. リクエストのCookieからリフレッシュトークンを取り出して、DRFの標準処理に渡す
-        raw_refresh = request.COOKIES.get(settings.SIMPLE_JWT["AUTH_COOKIE_REFRESH"])
-        if raw_refresh:
-            request.data["refresh"] = raw_refresh
-            
-        # 2. 標準のリフレッシュ処理を実行
-        response = super().post(request, *args, **kwargs)
+        # 1. 直接 "refresh_token" という名前でブラウザのCookieから取り出す
         
-        # リフレッシュが成功（200 OK）した場合のみ処理
+        print("\n=== 🔍 [DEBUG] リフレッシュ通信が届きました ===")
+        print("ブラウザから届いたすべてのクッキー:", request.COOKIES)
+        raw_refresh = request.COOKIES.get("refresh_token")
+       # raw_refresh = request.COOKIES.get(settings.SIMPLE_JWT['AUTH_COOKIE_REFRESH'])
+        print(f"取り出した refresh_token の値: {raw_refresh}")
+        if raw_refresh:
+            # 💡【ここを修正しました！】
+            # request.data が上書きできない設定（QueryDict）になっている場合を考慮し、
+            # 一時的に上書き可能なコピーを作成するか、辞書に変換してデータを流し込みます
+            #if hasattr(request.data, '_mutable'):
+             #   request.data._mutable = True # ロックを解除
+            
+            request.data["refresh"] = raw_refresh
+        else:
+            print("🚨 警告: Cookieの中に 'refresh_token' が見つかりませんでした！")   
+        # 2. 親クラス（Simple JWTの標準処理）を実行する
+        try:
+            response = super().post(request, *args, **kwargs)
+            print("✅ Simple JWT の内部検証: 成功しました！")
+        except Exception as e:
+            # トークン自体が不正・期限切れの場合は 401 Unauthorized エラーを返す
+            print(f"❌ Simple JWT の検証失敗！理由: {str(e)}")
+            return Response({"success": False, "error": str(e)}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        # 3. リフレッシュが成功（200 OK）した場合のみ、新しいクッキーを配る
         if response.status_code == 200:
             access_token = response.data.get("access")
             
-            # レスポンスのJSONを綺麗にする
-            response.data = {"success": True, "message": "トークンを更新しました。"}
+            # フロントエンド用の綺麗なメッセージ（JSONボディ）
+            response.data = {
+                "success": True, 
+                "message": "アクセストークンを新しく更新しました。"
+            }
             
-            # 新しいアクセストークンをCookieに上書き保存する
             cookie_settings = settings.SIMPLE_JWT
             response.set_cookie(
-                key=cookie_settings["AUTH_COOKIE"],
+                key=cookie_settings["AUTH_COOKIE"], 
                 value=access_token,
                 expires=cookie_settings["ACCESS_TOKEN_LIFETIME"],
                 secure=cookie_settings.get("AUTH_COOKIE_SECURE", False),
@@ -98,5 +119,5 @@ class CookieTokenRefreshView(TokenRefreshView):
                 samesite=cookie_settings["AUTH_COOKIE_SAMESITE"],
                 path=cookie_settings["AUTH_COOKIE_PATH"],
             )
+            
         return response
-
