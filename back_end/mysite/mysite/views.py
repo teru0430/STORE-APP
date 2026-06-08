@@ -102,6 +102,7 @@ class CookieTokenRefreshView(TokenRefreshView):
         # 3. リフレッシュが成功（200 OK）した場合のみ、新しいクッキーを配る
         if response.status_code == 200:
             access_token = response.data.get("access")
+            refresh_token = response.data.get("refresh")
             
             # フロントエンド用の綺麗なメッセージ（JSONボディ）
             response.data = {
@@ -114,6 +115,16 @@ class CookieTokenRefreshView(TokenRefreshView):
                 key=cookie_settings["AUTH_COOKIE"], 
                 value=access_token,
                 expires=cookie_settings["ACCESS_TOKEN_LIFETIME"],
+                secure=cookie_settings.get("AUTH_COOKIE_SECURE", False),
+                httponly=cookie_settings["AUTH_COOKIE_HTTP_ONLY"],
+                samesite=cookie_settings["AUTH_COOKIE_SAMESITE"],
+                path=cookie_settings["AUTH_COOKIE_PATH"],
+            )
+            
+            response.set_cookie(
+                key=cookie_settings["AUTH_COOKIE_REFRESH"],
+                value=refresh_token,
+                expires=cookie_settings["REFRESH_TOKEN_LIFETIME"],
                 secure=cookie_settings.get("AUTH_COOKIE_SECURE", False),
                 httponly=cookie_settings["AUTH_COOKIE_HTTP_ONLY"],
                 samesite=cookie_settings["AUTH_COOKIE_SAMESITE"],
