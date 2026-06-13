@@ -1,0 +1,59 @@
+.hederCss {
+    background-color: rgb(94, 92, 95);
+    color: white;
+    width: 100%;
+    height: 30%;
+    max-height: 80px;
+    display: flex;
+    position: sticky;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    
+}
+
+.userspace{
+    font-size: 20px;
+    text-align: left;
+    margin-right: auto;
+    margin-left: 30px;
+    justify-content: flex-start;
+    background-color: rgb(212, 78, 85);
+    border-radius: 10px;
+    padding: 10px 30px;
+}
+
+.button {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    margin-right: 10px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+
+
+.buttonChi {
+    font-size: 15px;
+    background-color: rgb(4, 137, 247);
+    padding: 10px 20px;
+    border-radius: 30px;
+    list-style: none;
+    margin-right: 20px;
+}
+
+.buttonChi:hover {
+    background-color: rgb(6, 70, 245);
+}
+
+.link {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
