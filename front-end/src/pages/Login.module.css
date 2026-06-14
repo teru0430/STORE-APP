@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(139, 139, 160);
+  background-color: rgb(139, 139, 139);
   overflow-y: hidden;
 
 }
@@ -12,7 +12,7 @@ body {
 }
 
 .formContainer form {
-  background-color: rgb(229, 233, 224);
+  background-color: rgb(226, 226, 226);
   width: 70%;
   max-width: 450px;
   padding: 30px;

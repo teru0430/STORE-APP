@@ -5,11 +5,12 @@ import style from './Heder.module.css'
 
 export default function Header(props) {
     const {user} = props;
+    console.log(user)
     return (
     <>
       <div className={style.hederCss}>
         <div className={style.userspace}>
-            {user ? user.username:'ゲスト'}
+            {user?.username||'ゲスト'}
         </div>
         <ul className={style.button}>
             <li className={style.buttonChi}>

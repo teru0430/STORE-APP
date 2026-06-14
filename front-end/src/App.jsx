@@ -50,7 +50,7 @@ function App() {
   
   return (
     <BrowserRouter>
-      <Header user={user}/>
+      <Header  user={user}/>
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />

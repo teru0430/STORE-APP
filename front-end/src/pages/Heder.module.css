@@ -1,5 +1,5 @@
 .hederCss {
-    background-color: rgb(94, 92, 95);
+    background-color: rgb(117, 117, 117);
     color: white;
     width: 100%;
     height: 30%;
@@ -7,7 +7,7 @@
     display: flex;
     position: sticky;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-direction: row;
 }
 

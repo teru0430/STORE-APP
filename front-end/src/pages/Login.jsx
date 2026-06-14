@@ -50,6 +50,7 @@ export default function Login() {
 
 
   return (
+    <body>
     <div className={style.formContainer}>
         <form onSubmit={(e) => handleSubmit(e)}>
             <h1>ログインフォーム</h1>
@@ -70,5 +71,6 @@ export default function Login() {
 
         </form>
     </div>
+    </body>
   );
 }
