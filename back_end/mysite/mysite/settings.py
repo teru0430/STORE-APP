@@ -149,7 +149,7 @@ SIMPLE_JWT = {
     "AUTH_COOKIE_HTTP_ONLY": True,          # JSから読めなくする（超重要：XSS対策）
     "AUTH_COOKIE_PATH": "/",                # Cookieが有効なURL範囲
     "AUTH_COOKIE_SAMESITE": "Lax",          # CSRF対策
-    "AUTH_COOKIE_SECURE": True,           # 本番環境(HTTPS)にする時はコメントアウトを外す
+    # "AUTH_COOKIE_SECURE": True,           # 本番環境(HTTPS)にする時はコメントアウトを外す
 
 
     "ALGORITHM": "HS256",

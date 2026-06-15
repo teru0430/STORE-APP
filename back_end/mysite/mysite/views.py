@@ -134,18 +134,21 @@ class CookieTokenRefreshView(TokenRefreshView):
         return response
 
 class LogoutView(APIView):
+    authentication_classes = []
+    
     
     def post(self, request):
         refresh_token = request.COOKIES.get("refresh_token")
         
+        
         if refresh_token:
             try:
                 refresh = RefreshToken(refresh_token)
-                print(refresh)
+                
             except Exception as e:
                 return Response({"error":"Error" + str(e)}, status=status.HTTP_400_BAD_REQUEST)
         
-        response = Response({"messege": "Successfilly logged out"},status=status.HTTP_200_OK)  
+        response = Response({"message": "Successfully logged out"},status=status.HTTP_200_OK)  
         response.delete_cookie("access_token")
         response.delete_cookie("refresh_token")
         

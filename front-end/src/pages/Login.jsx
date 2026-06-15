@@ -2,7 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import style from './Login.module.css'
 
-export default function Login() {
+export default function Login(props) {
+  const {api, setUser} = props;
   axios.defaults.withCredentials = true
 
   const initialValues = {username: "", password:""};
@@ -17,6 +18,13 @@ export default function Login() {
     setFormValues({...formValues, [name]: value});
     // console.log(formValues);
   };
+  const Callapi = async() =>{
+      try{
+        const res = await api.get('accounts/me/');
+        setUser(res.data)
+      }catch(error){
+              console.log('loginplz')
+      }}; 
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -33,6 +41,8 @@ export default function Login() {
       } catch (error) {
         console.error('ログイン失敗:', error);
       }
+      Callapi()  
+      
     };
     
     
@@ -50,7 +60,7 @@ export default function Login() {
 
 
   return (
-    <body>
+
     <div className={style.formContainer}>
         <form onSubmit={(e) => handleSubmit(e)}>
             <h1>ログインフォーム</h1>
@@ -71,6 +81,5 @@ export default function Login() {
 
         </form>
     </div>
-    </body>
   );
 }

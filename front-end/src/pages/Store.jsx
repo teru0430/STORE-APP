@@ -7,7 +7,7 @@ export default function Store() {
     <>
       <h1 className={styles.title}>商品一覧</h1>
       <hr/>
-      <body className={styles.body}>
+      <div className={styles.body}>
       <div className={styles.productContainer}>
       <div className={styles.productItem}>
           <div className={styles.productImage}>
@@ -43,7 +43,7 @@ export default function Store() {
         
       </div>
     </div>
-    </body>
+    </div>
     </>
     
   )

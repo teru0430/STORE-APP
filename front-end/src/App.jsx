@@ -17,9 +17,8 @@ function App() {
   });
   let retry = true
   const [user, setUser] = useState({})
-  useEffect(() => {
-    console.log('API')
-    const Callapi = async() =>{
+
+  const Callapi = async() =>{
       try{
         const res = await api.get('accounts/me/');
         setUser(res.data)
@@ -38,6 +37,9 @@ function App() {
         };
       };
     };
+  useEffect(() => {
+    console.log('API')
+    
     Callapi()
   },[])
   console.log(user)
@@ -50,9 +52,9 @@ function App() {
   
   return (
     <BrowserRouter>
-      <Header  user={user}/>
+      <Header setUser={setUser} user={user}/>
       <Routes>
-        <Route path='/login' element={<Login />} />
+        <Route  path='/login' element={<Login api={api} setUser={setUser}/>} />
         <Route path='/register' element={<Register />} />
         <Route path='/' element={<Store />} />
       </Routes>
