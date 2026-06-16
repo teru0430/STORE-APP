@@ -18,6 +18,7 @@
 .productItem:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  z-index: 0;
 }
 
 .productItem a {
@@ -57,7 +58,7 @@
 }
 
 .body {
-  background-color: rgb(227, 229, 230);
+  background-color: rgba(227, 229, 230, 0);
   overflow-y: scroll;
 
 }
@@ -74,6 +75,14 @@
     min-width: 100px;
     max-width: auto;
     
-    
-
 }
+.goodslist{
+  padding-top: 100px;
+  background-image: url('../assets/Game-background-material1.jpg');
+  background-size: cover;
+  background-position: center; 
+  background-attachment: fixed;
+  margin: 0;
+}
+
+

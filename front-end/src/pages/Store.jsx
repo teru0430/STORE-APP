@@ -4,7 +4,7 @@ import Image from '../assets/hurimesi.jpg'
 
 export default function Store() {
   return (
-    <>
+    <div className={styles.goodslist}>
       <h1 className={styles.title}>商品一覧</h1>
       <hr/>
       <div className={styles.body}>
@@ -42,9 +42,251 @@ export default function Store() {
           </div>
         
       </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
+      <div className={styles.productItem}>
+        
+          <div className={styles.productImage}>
+            <img src={Image} alt="商品名3" />
+          </div>
+          <div className={styles.productInfo}>
+            <h3 className={styles.productTitle}>商品名が入ります（ここに商品名）</h3>
+            <p className={styles.productPrice}>¥12,000 (税込)</p>
+          </div>
+        
+      </div>
     </div>
     </div>
-    </>
+    </div>
     
   )
 }

@@ -20,7 +20,7 @@ function App() {
 
   const Callapi = async() =>{
       try{
-        const res = await api.get('accounts/me/');
+        const res = await api.get('api/secret/');
         setUser(res.data)
         
       }catch(error){

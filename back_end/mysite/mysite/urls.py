@@ -11,7 +11,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
    # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/', CookieTokenObtainPairView.as_view(), name='token_obtain_pair'),
-   # path('api/secret/', SecretDataView.as_view(), name='secret_data'),
+    path('api/secret/', SecretDataView.as_view(), name='secret_data'),
     path('api/token/refresh/', CookieTokenRefreshView.as_view(), name='token_refresh'),
     path('logout/', LogoutView.as_view(), name='logout'),
    # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
