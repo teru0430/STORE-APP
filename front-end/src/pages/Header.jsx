@@ -8,7 +8,7 @@ export default function Header(props) {
     const {user, setUser} = props;
     const handleSubmit = async(e) =>{
         try{
-            const res = await axios.post('http://localhost:8000/logout/',{withCredentials: true})
+            const res = await axios.post('http://127.0.0.1:8000/api/users/logout/' ,null,{withCredentials: true})
             console.log(res.status)
             if(res.status === 200){
                 setUser({});
@@ -26,7 +26,7 @@ export default function Header(props) {
       <div className={style.hederCss}>
         <h3 className={style.htitle}>Arai Games</h3>
         <ul className={style.button}>
-            {user?.username ?(<div className={style.userspace}>{user.username}</div>):<div className={style.nouser}></div>}
+            {user?.username?(<div className={style.userspace}>{user.username}</div>):<div className={style.nouser}></div>}
             
             <li className={style.buttonChi}>
                 {user?.username? (<button className={style.logout} onClick={()=> handleSubmit()}>ログアウト</button>)

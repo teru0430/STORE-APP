@@ -6,7 +6,7 @@ export default function Login(props) {
   const {api, setUser} = props;
   axios.defaults.withCredentials = true
 
-  const initialValues = {username: "", password:""};
+  const initialValues = {email: "", password:""};
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false)
@@ -20,7 +20,7 @@ export default function Login(props) {
   };
   const Callapi = async() =>{
       try{
-        const res = await api.get('accounts/me/');
+        const res = await api.get('users/user-info/');
         setUser(res.data)
       }catch(error){
               console.log('loginplz')
@@ -35,13 +35,14 @@ export default function Login(props) {
     const errorCount = Object.keys(errors).length;
     if (errorCount === 0) {
       try {
-        const response = await axios.post('http://localhost:8000/api/token/', formValues);
+        const response = await axios.post('http://localhost:8000/api/users/login/', formValues);
         console.log('ログイン成功:', response.data);
+        setUser(response.data.user)
         // 必要に応じてレスポンスの処理
       } catch (error) {
         console.error('ログイン失敗:', error);
       }
-      Callapi()  
+      // Callapi()  
       
     };
     
@@ -49,7 +50,7 @@ export default function Login(props) {
   };
   const validate = (values) => {
     const errors = {};
-    if (!values.username){
+    if (!values.email){
       errors.username = "ユーザー名を入力してください";  
     }
     if (!values.password){
@@ -67,8 +68,8 @@ export default function Login(props) {
             <hr/>
             <div className={style.uiForm}>
               <div className={style.formField}>
-                <label>ユーザー名</label>
-                <input type="text" placeholder='ユーザー名' name="username" onChange={(e) => handleChange(e)}/>
+                <label>Email</label>
+                <input type="text" placeholder='ユーザー名' name="email" onChange={(e) => handleChange(e)}/>
               </div>
               <p className={style.errorMsg}>{formErrors.username}</p>
               <div className={style.formField}>

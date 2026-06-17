@@ -20,14 +20,14 @@ function App() {
 
   const Callapi = async() =>{
       try{
-        const res = await api.get('api/secret/');
+        const res = await api.get('api/users/user-info/');
         setUser(res.data)
         
       }catch(error){
         if (retry){
           retry = false
           try{
-            const res = await api.post('api/token/refresh/');
+            const res = await api.post('api/users/refresh/');
             Callapi()
 
           }catch(error){
