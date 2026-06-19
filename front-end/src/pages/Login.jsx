@@ -69,7 +69,7 @@ export default function Login(props) {
             <div className={style.uiForm}>
               <div className={style.formField}>
                 <label>Email</label>
-                <input type="text" placeholder='ユーザー名' name="email" onChange={(e) => handleChange(e)}/>
+                <input type="text" placeholder='Email' name="email" onChange={(e) => handleChange(e)}/>
               </div>
               <p className={style.errorMsg}>{formErrors.username}</p>
               <div className={style.formField}>

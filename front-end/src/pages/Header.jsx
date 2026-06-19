@@ -8,7 +8,7 @@ export default function Header(props) {
     const {user, setUser} = props;
     const handleSubmit = async(e) =>{
         try{
-            const res = await axios.post('http://127.0.0.1:8000/api/users/logout/' ,null,{withCredentials: true})
+            const res = await axios.post('http://localhost:8000/api/users/logout/' ,null,{withCredentials: true})
             console.log(res.status)
             if(res.status === 200){
                 setUser({});

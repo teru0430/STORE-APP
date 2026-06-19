@@ -1,5 +1,5 @@
 .hederCss {
-    background-color: rgb(0, 110, 253);
+    background-color: rgb(4, 73, 163);
     color: rgb(0, 0, 0);
     width: 100%;
     height: 80px;
@@ -38,22 +38,29 @@
 
 .buttonChi {
     font-size: 15px;
-    background-color: rgb(253, 253, 253);
-    padding: 10px ;
-    border-radius: 30px;
+    background-color: rgb(4, 73, 163);
+    padding: 1px ;
+    border-radius: 10px;
     list-style: none;
-    margin-right: 5px;
-    margin-top: 5px;
+    margin-right: 15px;
+    margin-top: 10px;
+    
 }
 
-.buttonChi:hover {
-    background-color: rgb(175, 175, 175);
-}
+
 
 .link {
-    color: #000;
+    color: #ffffff;
     text-decoration: none;
     font-weight: bold;
+    font-size: 18px;
+}
+.link:hover {
+    color: black;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+
 }
 
 .htitle {
@@ -72,6 +79,22 @@
     border: none;
     font-weight: bold;
     cursor: pointer; 
-    background-color: rgba(4, 138, 247, 0);
+    background-color: rgba(221, 183, 183, 0);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px;
+    margin-top: -10px;
     
+}
+.logout:hover {
+    color: black;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-right: 15px;
+    
+
+
 }
