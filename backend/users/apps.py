@@ -8,10 +8,10 @@ class UsersConfig(AppConfig):
     
     
     
-    def ready(self):
-       """
-       This function is called when startup.
-       """
-       from update import start # <= さっき作った start関数をインポート
+    # def ready(self):
+    #    """
+    #    This function is called when startup.
+    #    """
+    #    from update import start # <= さっき作った start関数をインポート
        
-       start()
+    #    start()
