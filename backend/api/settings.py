@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework',
     'users',
+    'priceOB',
     'django_apscheduler',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,7 +51,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-     "corsheaders.middleware.CorsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -137,10 +138,16 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 REST_FRAMEWORK = {
 
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': [
     
         'users.authentication.CookieJWTAuthentication',
-    )
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'django_eventstream.renderers.SSEEventRenderer', 
+        'django_eventstream.renderers.BrowsableAPIEventStreamRenderer', 
+    ],
 
 }
 
