@@ -42,7 +42,7 @@ function App() {
     
     Callapi()
   },[])
-  console.log(user)
+  console.log(user, user.id)
   
   
   
@@ -56,7 +56,7 @@ function App() {
       <Routes>
         <Route  path='/login' element={<Login api={api} setUser={setUser}/>} />
         <Route path='/register' element={<Register />} />
-        <Route path='/' element={<Store />} />
+        <Route path='/' element={<Store userID={user.id} />} />
       </Routes>
     </BrowserRouter>
    

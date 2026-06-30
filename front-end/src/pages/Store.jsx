@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import styles from './Store.module.css'
 import Image from '../assets/hurimesi.jpg'
 
-export default function Store() {
-  const userId = 20;
+export default function Store({ userID }) {
+  const userId = userID;
 
   useEffect(() => {
     const ev = new EventSource(

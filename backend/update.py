@@ -16,7 +16,7 @@ def update():
    print('Update!',count)
    # amazon_tarack_price()
    send_event(
-            "user_20",
+            "user-20",
             "test_message",
             {
                 "user_id": '20',

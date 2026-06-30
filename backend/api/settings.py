@@ -165,3 +165,4 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 EVENTSTREAM_STORAGE_CLASS = 'django_eventstream.storage.DjangoModelStorage'
+EVENTSTREAM_CHANNELMANAGER_CLASS = 'priceOB.channelmanager.UserChannelManager'

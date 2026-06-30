@@ -5,6 +5,10 @@ from rest_framework.response import Response
 from django_eventstream import send_event
 from .models import URLModel
 from .serializers import URLModelSerializer
+from django_eventstream.views import events
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from users.models import CustomUser
+from rest_framework.authentication import SessionAuthentication
 
 
 class URLModelViewSet(viewsets.ModelViewSet):
@@ -21,7 +25,7 @@ class URLModelViewSet(viewsets.ModelViewSet):
         response = super().create(request, *args, **kwargs)
         
         if response.status_code == 201:
-            user_channel = f"user_{request.user.id}"
+            user_channel = f"user-{request.user.id}"
             print("send_event called", user_channel, "event_type=", "url_created")
             send_event(
                 user_channel,
@@ -45,7 +49,7 @@ class URLModelViewSet(viewsets.ModelViewSet):
         response = super().destroy(request, *args, **kwargs)
         
         if response.status_code == 204:
-            user_channel = f"user_{request.user.id}"
+            user_channel = f"user-{request.user.id}"
             print("send_event called", user_channel, "event_type=", "url_deleted")
             send_event(
                 user_channel,
@@ -62,13 +66,13 @@ class URLModelViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['post'], permission_classes=[IsAuthenticated])
     def test_event(self, request):
         """テスト用エンドポイント：イベント送信テスト"""
-        user_channel = f"user_{request.user.id}"
+        user_channel = f"user-{request.user.id}"
         print("send_event called", user_channel, "event_type=", "test_message")
         send_event(
             user_channel,
             "test_message",
             {
-                "user_id": request.user.id,
+                "user-id": request.user.id,
                 "username": request.user.username,
                 "message": "これはテストメッセージです"
             }
@@ -80,7 +84,8 @@ class URLModelViewSet(viewsets.ModelViewSet):
         )
 
 send_event(
-    "user_20",
+    "user-20",
     "test_message",
     {"message": "SSE受信テスト", "time": "2026-06-30T12:00:00Z"}
 )
+
