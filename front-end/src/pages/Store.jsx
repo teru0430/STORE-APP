@@ -1,8 +1,46 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './Store.module.css'
 import Image from '../assets/hurimesi.jpg'
 
 export default function Store() {
+  const userId = 20;
+
+  useEffect(() => {
+    const ev = new EventSource(
+      `http://localhost:8000/api/priceob/users/${userId}/events/`,
+      { withCredentials: true }
+    );
+
+    ev.onopen = () => {
+      console.log('SSE opened', ev.readyState);
+    };
+
+    ev.onerror = e => {
+      console.error('SSE error', e, 'readyState', ev.readyState);
+    };
+
+    ev.addEventListener('stream-open', e => {
+      console.log('stream-open', e.data);
+    });
+
+    ev.addEventListener('url_created', e => {
+      console.log('url_created event', JSON.parse(e.data));
+    });
+
+    ev.addEventListener('test_message', e => {
+      console.log('test_message event', JSON.parse(e.data));
+    });
+
+    ev.onmessage = e => {
+      console.log('default message', e.data);
+    };
+
+    return () => {
+      ev.close();
+      console.log('SSE closed');
+    };
+  }, [userId]);
+
   return (
     <div className={styles.goodslist}>
       <h1 className={styles.title}>商品一覧</h1>

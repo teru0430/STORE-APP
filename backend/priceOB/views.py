@@ -22,6 +22,7 @@ class URLModelViewSet(viewsets.ModelViewSet):
         
         if response.status_code == 201:
             user_channel = f"user_{request.user.id}"
+            print("send_event called", user_channel, "event_type=", "url_created")
             send_event(
                 user_channel,
                 "url_created",
@@ -45,6 +46,7 @@ class URLModelViewSet(viewsets.ModelViewSet):
         
         if response.status_code == 204:
             user_channel = f"user_{request.user.id}"
+            print("send_event called", user_channel, "event_type=", "url_deleted")
             send_event(
                 user_channel,
                 "url_deleted",
@@ -61,6 +63,7 @@ class URLModelViewSet(viewsets.ModelViewSet):
     def test_event(self, request):
         """テスト用エンドポイント：イベント送信テスト"""
         user_channel = f"user_{request.user.id}"
+        print("send_event called", user_channel, "event_type=", "test_message")
         send_event(
             user_channel,
             "test_message",
@@ -76,3 +79,8 @@ class URLModelViewSet(viewsets.ModelViewSet):
             status=status.HTTP_200_OK
         )
 
+send_event(
+    "user_20",
+    "test_message",
+    {"message": "SSE受信テスト", "time": "2026-06-30T12:00:00Z"}
+)

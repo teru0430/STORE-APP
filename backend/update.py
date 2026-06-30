@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import asyncio
+from django_eventstream import send_event
 count = 0
 def update():
    """
@@ -13,8 +14,16 @@ def update():
    global count
    count +=1
    print('Update!',count)
-   amazon_tarack_price()
-
+   # amazon_tarack_price()
+   send_event(
+            "user_20",
+            "test_message",
+            {
+                "user_id": '20',
+                "username": "testuser",
+                "message": "これはテストメッセージです"
+            }
+        )
 
 
 
