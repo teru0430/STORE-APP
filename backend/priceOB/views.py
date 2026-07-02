@@ -83,9 +83,5 @@ class URLModelViewSet(viewsets.ModelViewSet):
             status=status.HTTP_200_OK
         )
 
-send_event(
-    "user-20",
-    "test_message",
-    {"message": "SSE受信テスト", "time": "2026-06-30T12:00:00Z"}
-)
+
 

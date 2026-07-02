@@ -3,7 +3,7 @@ import styles from './Store.module.css'
 import Image from '../assets/hurimesi.jpg'
 
 export default function Store({ userID }) {
-  const userId = userID;
+  const userId = userID; 
 
   useEffect(() => {
     const ev = new EventSource(

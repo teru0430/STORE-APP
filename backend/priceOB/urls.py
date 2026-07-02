@@ -8,6 +8,6 @@ router.register("urls", URLModelViewSet, basename="urls")
 
 urlpatterns = [
     path("", include(router.urls)),
-    path('users/<user_id>/events/', include(django_eventstream.urls),{'format-channels': ['user-{user_id}']})
+    path('users/<int:user_id>/events/', include(django_eventstream.urls),{'format-channels': ['user-{user_id}']})
 ] 
 
