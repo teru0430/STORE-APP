@@ -41,13 +41,20 @@ class URLModelViewSet(viewsets.ModelViewSet):
         return response
 
     def destroy(self, request, *args, **kwargs):
-        """URL削除時にイベント送信"""
+        """URL削除時にイベント送信。本人以外は削除不可。"""
         instance = self.get_object()
+
+        if instance.user != request.user:
+            return Response(
+                {"detail": "このURLを削除する権限がありません。"},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
         url_id = instance.id
         url_title = instance.title
-        
+
         response = super().destroy(request, *args, **kwargs)
-        
+
         if response.status_code == 204:
             user_channel = f"user-{request.user.id}"
             print("send_event called", user_channel, "event_type=", "url_deleted")
@@ -60,7 +67,7 @@ class URLModelViewSet(viewsets.ModelViewSet):
                     "message": "URLが削除されました"
                 }
             )
-        
+
         return response
 
     @action(detail=False, methods=['post'], permission_classes=[IsAuthenticated])

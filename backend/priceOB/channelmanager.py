@@ -4,6 +4,7 @@ from django.core.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from django_eventstream.eventstream import get_events
 import threading
+from django_eventstream.models import Event
 class UserChannelManager(DefaultChannelManager):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
