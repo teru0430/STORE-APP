@@ -6,7 +6,7 @@ User = AUTH_USER_MODEL
 # Create your models here.
 class URLModel(models.Model):
     title = models.CharField(max_length=100)
-    url = models.URLField(max_length=1000)
+    url = models.URLField(max_length=1500)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     price = models.IntegerField() 

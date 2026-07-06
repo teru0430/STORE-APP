@@ -16,7 +16,6 @@ def update():
    urls = URLModel.objects.all()
    event = Event.objects.all()
    # print('urls:',urls)
-   print('event:',event)
    # for url in urls:
    #    print('url:',url.url)
    #    print('title:',url.title)
@@ -24,9 +23,7 @@ def update():
    global count
    count +=1
    print('Update!',count)
-   
    one_week_ago = timezone.now() - timedelta(days=7)
-   print('one_week_ago:',one_week_ago)
    Event.objects.filter(created__lt=one_week_ago).delete()
    # amazon_tarack_price()
    # send_event(
@@ -52,6 +49,7 @@ def amazon_tarack_price(url):
    price = int(price.replace(",", ""))
    print(price)
    print(title.strip())
+   return price
    
     
   
