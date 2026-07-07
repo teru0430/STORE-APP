@@ -11,7 +11,7 @@ class URLModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     price = models.IntegerField() 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='urls_user')
-   
+    last_scraped_at = models.DateTimeField(blank=True, null=True)
    
     class Meta:
         constraints = [

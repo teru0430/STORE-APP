@@ -2,6 +2,7 @@ from django.apps import AppConfig
 import os
 
 
+
 class PriceobConfig(AppConfig):
     name = 'priceOB'
 

@@ -31,6 +31,14 @@ export default function Store({ userID }) {
       console.log('test_message event', JSON.parse(e.data));
     });
 
+    ev.addEventListener("price_down", e => {
+      console.log('price_down event', JSON.parse(e.data));
+    });
+
+    ev.addEventListener('price_updated', e => {
+      console.log('price_updated event', JSON.parse(e.data));
+    });
+
     ev.onmessage = e => {
       console.log('default message', e.data);
     };
