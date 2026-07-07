@@ -5,7 +5,7 @@ from update import amazon_tarack_price
 class URLModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = URLModel
-        fields = ['id', 'title', 'url', 'user', 'price']
+        fields = ['id', 'title', 'url',  'price']
         read_only_fields = ['id', 'created_at', 'user', 'price']
 
     def create(self, validated_data):

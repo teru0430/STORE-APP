@@ -9,6 +9,7 @@ class UserChannelManager(DefaultChannelManager):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._thread_local = threading.local()
+        print('self._thread_local:', self._thread_local)
     
     
     def get_channels_for_request(self, request, view_kwargs):
@@ -20,7 +21,7 @@ class UserChannelManager(DefaultChannelManager):
         except Exception as e:
             raise PermissionDenied(f"Authentication failed: {str(e)}")    
         print('Authenticated user:', token[1]['user_id'] if token else None)
-        request.user = token[0]
+        print('request:', request.user)
         if "format-channels" in view_kwargs:
             out = set()
             for format_channel in view_kwargs["format-channels"]:

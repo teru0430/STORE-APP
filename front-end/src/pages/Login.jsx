@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import style from './Login.module.css'
+import { useNavigate } from 'react-router-dom';
 
 export default function Login(props) {
   const {api, setUser} = props;
   axios.defaults.withCredentials = true
-
+  const navigate = useNavigate();
+  
   const initialValues = {email: "", password:""};
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -38,6 +40,7 @@ export default function Login(props) {
         const response = await axios.post('http://localhost:8000/api/users/login/', formValues);
         console.log('ログイン成功:', response.data);
         setUser(response.data.user)
+        navigate('/');
         // 必要に応じてレスポンスの処理
       } catch (error) {
         console.error('ログイン失敗:', error);

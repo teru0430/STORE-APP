@@ -9,10 +9,9 @@ export default function Header(props) {
     const handleSubmit = async(e) =>{
         try{
             const res = await axios.post('http://localhost:8000/api/users/logout/' ,null,{withCredentials: true})
-            console.log(res.status)
-            if(res.status === 200){
-                setUser({});
-            };
+            console.log(res.status);
+            setUser({});
+            
         }catch(error){
             console.log(error)
         };

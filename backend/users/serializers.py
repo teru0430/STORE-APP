@@ -7,7 +7,7 @@ class CustomUserSerializer(ModelSerializer):
     
     class Meta:
         model = CustomUser
-        fields =("id", "email", "username")
+        fields =("id",  "username")
 
 class RegisterUserSerializer(ModelSerializer):
     class Meta:

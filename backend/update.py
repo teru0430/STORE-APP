@@ -24,7 +24,7 @@ def update():
    count +=1
    print('Update!',count)
    one_week_ago = timezone.now() - timedelta(days=7)
-   Event.objects.filter(created__lt=one_week_ago).delete()
+   # Event.objects.filter(created__lt=one_week_ago).delete()
    # amazon_tarack_price()
    # send_event(
    #          "user-20",
