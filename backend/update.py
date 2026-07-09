@@ -7,13 +7,23 @@ import time
 from bs4 import BeautifulSoup
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from priceOB.models import URLModel
+from priceOB.models import URLModel, MessageURLModel, MailBox
 from django_eventstream import send_event
 from django_eventstream.models import Event
 from channels.db import database_sync_to_async
+import random
 
 count = 0
-
+def add_msg(url, msg):
+   msgurl = MessageURLModel(message=msg, url=url)
+   msgurl.save()
+   user = url.user
+   print('user_id:',user.id)
+   mailbox = MailBox.objects.get(user_id=25)
+   print('mailbox:',mailbox)
+   mailbox.msg_url.add(msgurl)
+   
+   
 def update_pricedb(url, new_price):
    obj = URLModel.objects.get(id=url.id)
    obj.price = new_price
@@ -23,48 +33,54 @@ def update_price():
    """
    This function is called by start() below
    """
-   url = URLModel.objects.order_by('last_scraped_at').first()
-   if not url:
+   urlmodel = URLModel.objects.order_by('last_scraped_at').first()
+   if not urlmodel:
        print("No URLs to update.")
        return
 
-   print('url:',url.url)
-   print('title:',url.title)
-   new_price = amazon_tarack_price(url.url)
+   print('url:',urlmodel.url)
+   print('title:',urlmodel.title)
+   new_price = amazon_tarack_price(urlmodel.url)
+   if new_price is None:
+      return
    print('new_price:',new_price)
-   if new_price != url.price:
-      if new_price < url.price:
+   if new_price != urlmodel.price:
+      if new_price < urlmodel.price:
+         msg = f"{urlmodel.title}の価格が下がりました。古い価格は{urlmodel.price}円、新しい価格は{new_price}円です。"
          send_event(
-            f"user-{url.user.id}",
+            f"user-{urlmodel.user.id}",
             "price_down",
             {
-               "id": url.id,
-               "title": url.title,
-               "url": url.url,
+               "id": urlmodel.id,
+               "title": urlmodel.title,
+               "url": urlmodel.url,
                "new_price": new_price,
-               "message": f"{url.title}の価格が下がりました。古い価格は{url.price}円、新しい価格は{new_price}円です。"
+               "message": msg
             }
          )
       else:
+         msg = f"{urlmodel.title}の価格が上がりました。古い価格は{urlmodel.price}円、新しい価格は{new_price}円です。"
          send_event(
-            f"user-{url.user.id}",
+            f"user-{urlmodel.user.id}",
             "price_updated",
             {
-               "id": url.id,
-               "title": url.title,
-               "url": url.url,
+               "id": urlmodel.id,
+               "title": urlmodel.title,
+               "url": urlmodel.url,
                "new_price": new_price,
-               "message": f"{url.title}の価格が更新されました。古い価格は{url.price}円、新しい価格は{new_price}円です。"
+               "message": msg
             }
          )
       
-      update_pricedb(url, new_price)
+      update_pricedb(urlmodel, new_price)
       print('Price updated:', new_price)
+   msg ='test2'
+   add_msg(urlmodel, msg)   
    global count
    count +=1
    print('Update!',count)
-   url.last_scraped_at = timezone.now()
-   url.save()
+   urlmodel.last_scraped_at = timezone.now()
+   urlmodel.save()
 
 
 def amazon_tarack_price(url):
@@ -81,8 +97,14 @@ def amazon_tarack_price(url):
    # print(title.strip())
    
 # 2. Botとして弾かれないよう、ブラウザのUser-Agentを設定
+   user_agents = [
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+      "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+   ]
    headers = {
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+      "User-Agent": random.choice(user_agents),
       "Accept-Language": "ja-JP,ja;q=0.9"
    }
 
@@ -110,6 +132,7 @@ def amazon_tarack_price(url):
       
    except Exception as e:
       print(f"データの抽出中にエラーが発生しました: {e}")
+      price = None
    return price
 
 def check_event():

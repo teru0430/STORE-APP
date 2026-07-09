@@ -9,12 +9,17 @@ from django_eventstream.views import events
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from users.models import CustomUser
 from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import BasePermission
+
+class IsOwner(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return obj.user == request.user
 
 
 class URLModelViewSet(viewsets.ModelViewSet):
     queryset = URLModel.objects.all()
     serializer_class = URLModelSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
 
     def get_queryset(self):
         """ユーザーの自分のURLのみを表示"""
@@ -70,25 +75,7 @@ class URLModelViewSet(viewsets.ModelViewSet):
 
         return response
 
-    @action(detail=False, methods=['post'], permission_classes=[IsAuthenticated])
-    def test_event(self, request):
-        """テスト用エンドポイント：イベント送信テスト"""
-        user_channel = f"user-{request.user.id}"
-        print("send_event called", user_channel, "event_type=", "test_message")
-        send_event(
-            user_channel,
-            "test_message",
-            {
-                "user-id": request.user.id,
-                "username": request.user.username,
-                "message": "これはテストメッセージです"
-            }
-        )
-        
-        return Response(
-            {"status": "success", "message": "テストイベントを送信しました"},
-            status=status.HTTP_200_OK
-        )
+   
 
 
 

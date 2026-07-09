@@ -28,3 +28,5 @@ class URLModelSerializer(serializers.ModelSerializer):
         instance.url = validated_data.get('url', instance.url)
         instance.save()
         return instance
+
+

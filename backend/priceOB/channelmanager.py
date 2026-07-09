@@ -20,8 +20,6 @@ class UserChannelManager(DefaultChannelManager):
             self._thread_local.current_user = token[0]
         except Exception as e:
             raise PermissionDenied(f"Authentication failed: {str(e)}")    
-        print('Authenticated user:', token[1]['user_id'] if token else None)
-        print('request:', request.user)
         if "format-channels" in view_kwargs:
             out = set()
             for format_channel in view_kwargs["format-channels"]:
