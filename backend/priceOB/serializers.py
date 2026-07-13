@@ -1,18 +1,18 @@
 from rest_framework import serializers
-from .models import URLModel
+from .models import URLModel, MailBox, MessageURLModel
 from update import amazon_tarack_price
 
 class URLModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = URLModel
-        fields = ['id', 'title', 'url',  'price']
-        read_only_fields = ['id', 'created_at', 'user', 'price']
+        fields = ['id', 'title', 'url', 'price']
+        read_only_fields = ['id', 'price']
 
     def create(self, validated_data):
         """URLを新規作成"""
         user = self.context['request'].user
         print(validated_data['url'])
-        if not'https://www.amazon.co.jp' in validated_data['url']:
+        if not 'https://www.amazon.co.jp' in validated_data['url']:
             raise serializers.ValidationError("URLはAmazon.co.jpのもののみ許可されています。")
         validated_data['user'] = user
         try:
@@ -22,11 +22,24 @@ class URLModelSerializer(serializers.ModelSerializer):
         validated_data['price'] = amazon_price
         return URLModel.objects.create(**validated_data)
 
-    def update(self, instance, validated_data):
-        """URLを更新"""
-        instance.title = validated_data.get('title', instance.title)
-        instance.url = validated_data.get('url', instance.url)
-        instance.save()
-        return instance
+
+class MessageURLModelSerializer(serializers.ModelSerializer):
+    url = URLModelSerializer(read_only=True)
+
+    class Meta:
+        model = MessageURLModel
+        fields = ['id', 'message', 'url']
+        read_only_fields = ['id']
+
+
+class MailBoxSerializer(serializers.ModelSerializer):
+    msg_url = MessageURLModelSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = MailBox
+        fields = ['msg_url']
+    
+
+    
 
 

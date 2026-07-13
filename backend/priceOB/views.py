@@ -3,8 +3,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_eventstream import send_event
-from .models import URLModel
-from .serializers import URLModelSerializer
+from .models import URLModel, MailBox, MessageURLModel
+from .serializers import URLModelSerializer, MailBoxSerializer
 from django_eventstream.views import events
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from users.models import CustomUser
@@ -74,7 +74,18 @@ class URLModelViewSet(viewsets.ModelViewSet):
             )
 
         return response
+    
+    
+class MailBoxViewSet(viewsets.ModelViewSet):
+    queryset = MailBox.objects.all()
+    serializer_class = MailBoxSerializer
+    permission_classes = [IsAuthenticated, IsOwner]
 
+    def get_queryset(self):
+        """ユーザーの自分のMailBoxのみを表示"""
+        return MailBox.objects.filter(user=self.request.user)
+    
+    
    
 
 
