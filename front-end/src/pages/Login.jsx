@@ -44,6 +44,7 @@ export default function Login(props) {
         // 必要に応じてレスポンスの処理
       } catch (error) {
         console.error('ログイン失敗:', error);
+        setFormErrors({ apiError: 'ログインに失敗しました。メールアドレスまたはパスワードを確認してください。' });
       }
       // Callapi()  
       
@@ -54,7 +55,7 @@ export default function Login(props) {
   const validate = (values) => {
     const errors = {};
     if (!values.email){
-      errors.username = "ユーザー名を入力してください";  
+      errors.username = "メールアドレスを入力してください";  
     }
     if (!values.password){
       errors.password = "パスワードを入力してください"; 
@@ -80,6 +81,7 @@ export default function Login(props) {
                 <input type="text" placeholder='パスワード' name="password" onChange={(e) => handleChange(e)}/>
               </div>
               <p className={style.errorMsg}>{formErrors.password}</p>
+              <p className={style.errorMsg}>{formErrors.apiError}</p>
               <button className='submitButton'>ログイン</button>
             </div>
 

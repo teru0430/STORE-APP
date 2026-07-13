@@ -19,7 +19,7 @@ def add_msg(url, msg):
    msgurl.save()
    user = url.user
    print('user_id:',user.id)
-   mailbox = MailBox.objects.get(user_id=25)
+   mailbox = MailBox.objects.get(user_id=user.id)
    print('mailbox:',mailbox)
    mailbox.msg_url.add(msgurl)
    
@@ -75,7 +75,18 @@ def update_price():
       update_pricedb(urlmodel, new_price)
       print('Price updated:', new_price)
    msg ='test2'
-   add_msg(urlmodel, msg)   
+   add_msg(urlmodel, msg) 
+   send_event(
+            f"user-{urlmodel.user.id}",
+            "price_updated",
+            {
+               "id": urlmodel.id,
+               "title": urlmodel.title,
+               "url": urlmodel.url,
+               "new_price": new_price,
+               "message": msg
+            }
+         )  
    global count
    count +=1
    print('Update!',count)

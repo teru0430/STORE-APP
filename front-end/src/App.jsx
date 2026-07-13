@@ -42,9 +42,53 @@ function App() {
     
     Callapi()
   },[])
-  console.log(user, user.id)
+  console.log(user,typeof user.id)
   
-  
+  useEffect(() => {
+    if (!user.id) return;
+    
+    const ev = new EventSource(
+       `http://localhost:8000/api/priceob/users/${user.id}/events/`,
+       { withCredentials: true }
+    );
+ 
+    ev.onopen = () => {
+      console.log('SSE opened', ev.readyState);
+    };
+
+    ev.onerror = e => {
+      console.error('SSE error', e, 'readyState', ev.readyState);
+    };
+
+    ev.addEventListener('stream-open', e => {
+      console.log('stream-open', e.data);
+    });
+
+    ev.addEventListener('url_created', e => {
+      console.log('url_created event', JSON.parse(e.data));
+    });
+
+    ev.addEventListener('test_message', e => {
+      console.log('test_message event', JSON.parse(e.data));
+    });
+
+    ev.addEventListener("price_down", e => {
+      console.log('price_down event', JSON.parse(e.data));
+    });
+
+    ev.addEventListener('price_updated', e => {
+      console.log('price_updated event', JSON.parse(e.data));
+    });
+
+    ev.onmessage = e => {
+      console.log('default message', e.data);
+    };
+
+    return () => {
+      ev.close();
+      console.log('SSE closed');
+    };
+  }, [user.id]); 
   
 
   
