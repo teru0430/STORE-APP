@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import useSWR from 'swr';
 import Store from './pages/Store';
 import Header from './pages/Header';
+import Mailbox from './pages/Mailbox';
 // import api from './api';
 
 
@@ -101,6 +102,7 @@ function App() {
         <Route  path='/login' element={<Login api={api} setUser={setUser}/>} />
         <Route path='/register' element={<Register />} />
         <Route path='/' element={<Store userID={user.id} />} />
+        <Route path='/mailbox' element={<Mailbox />} />
       </Routes>
     </BrowserRouter>
    

@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import style from './Heder.module.css'
 import axios from 'axios'
+import { GoUnread } from "react-icons/go";
+
 
 export default function Header(props) {
     axios.defaults.withCredentials = true
@@ -29,16 +31,18 @@ export default function Header(props) {
             
             <li className={style.buttonChi}>
                 {user?.username? (<button className={style.logout} onClick={()=> handleSubmit()}>ログアウト</button>)
-                :(<Link to='/login' className={style.link}>ログイン</Link>)}
+                :(<Link to='/login' className={style.linkLogin}>ログイン</Link>)}
                 
             </li> 
             <li className={style.buttonChi}>
                 <Link to='/' className={style.link}>商品一覧</Link>
                 
-            </li> 
-            <li className={style.buttonChi}>
-                <Link to='/login' className={style.link}>ログイン</Link>
-            </li>  
+            </li>   
+             <li className={style.buttonChi}>
+                <Link to='/mailbox'>
+                    <GoUnread className={style.mail} size={33}/>
+                </Link>
+             </li>
         </ul>
       </div>
       

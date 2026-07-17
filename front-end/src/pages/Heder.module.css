@@ -55,6 +55,7 @@
     font-weight: bold;
     font-size: 18px;
     padding: 10px; 
+    margin-right: 10px;
 }
 .link:hover {
     color: black;
@@ -64,6 +65,21 @@
 
 }
 
+
+.linkLogin {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px; 
+}
+.linkLogin:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(212, 78, 85);
+    padding: 10px; 
+    border-radius: 10px;
+
+}
 .htitle {
     position: absolute;
     width: 100px;
@@ -95,7 +111,19 @@
     border-radius: 10px;
     /* padding-left: 10px;
     margin-right: 15px; */
-    
 
+}
+
+.mail {
+    color: white;
+    margin-top: -7px;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.mail:hover {
+    color: black;
+    background-color: white;
+    border-radius: 10px;
 
 }
