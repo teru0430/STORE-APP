@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './Store.module.css'
 import Image from '../assets/hurimesi.jpg'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 export default function Store() {
   const [urls, setUrls] = useState([]);
@@ -19,7 +20,7 @@ export default function Store() {
     UrlList();
   }, []);
   console.log(urls)
-
+  
   const handleDelete = (id) => {
     console.log('削除するID:', id);
   };
@@ -28,6 +29,7 @@ export default function Store() {
       <div className={styles.goodslist}>
       <h1 className={styles.title}>商品一覧</h1>
       <hr/>
+      <Link to='/post' className={styles.link}> ＋ </Link>
         <ul>
           {urls.map((url) => (
             <li key={url.id} >

@@ -23,4 +23,27 @@
   height: 100vh;
 }
 
+.link {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  position: fixed;
+  margin-left: 10%;
+  text-decoration: none;
+  color: white;
+  background-color: rgb(4, 73, 163);
+  font-size: 46px;
+  padding: 0;
+  width: 100px; 
+  height: 100px; 
+  border-radius: 50%;
+  padding-bottom: 2px;
+  
+}
 
+.link:hover {
+  background-color: rgb(2, 41, 92);
+  color: rgb(255, 255, 255);
+
+
+}

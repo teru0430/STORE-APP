@@ -35,12 +35,12 @@ export default function Header(props) {
                 
             </li> 
             <li className={style.buttonChi}>
-                <Link to='/' className={style.link}>商品一覧</Link>
+                <Link to='/' className={style.link}>追跡一覧</Link>
                 
             </li>   
              <li className={style.buttonChi}>
                 <Link to='/mailbox'>
-                    <GoUnread className={style.mail} size={33}/>
+                    <GoUnread className={style.mail} size={30}/>
                 </Link>
              </li>
         </ul>

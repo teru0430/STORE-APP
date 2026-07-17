@@ -8,6 +8,7 @@ import useSWR from 'swr';
 import Store from './pages/Store';
 import Header from './pages/Header';
 import Mailbox from './pages/Mailbox';
+import Posturl from './pages/Posturl';
 // import api from './api';
 
 
@@ -103,6 +104,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/' element={<Store userID={user.id} />} />
         <Route path='/mailbox' element={<Mailbox />} />
+        <Route path='/post' element={<Posturl />} />
       </Routes>
     </BrowserRouter>
    
