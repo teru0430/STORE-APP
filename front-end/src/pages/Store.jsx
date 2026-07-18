@@ -3,9 +3,17 @@ import styles from './Store.module.css'
 import Image from '../assets/hurimesi.jpg'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { GrAmazon } from "react-icons/gr";
 
 export default function Store() {
-  const [urls, setUrls] = useState([]);
+  const [urls, setUrls] = useState([{id:1, title: "test", url: "test.com", price: 100},
+                                    {id:2, title: "test2", url: "test.com", price: 450},
+                                    {id:3, title: "test3", url: "test.com", price: 4450},
+                                    {id:4, title: "test3", url: "test.com", price: 4450},
+                                    {id:5, title: "test3", url: "test.com", price: 4450},
+                                    {id:6, title: "test3", url: "test.com", price: 4450},
+                                    {id:7, title: "test3", url: "test.com", price: 4450},
+                                    {id:8, title: "testaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", url: "test.com", price: 4450},]);
   useEffect(() => {
     const UrlList = async() =>{
           try{
@@ -27,18 +35,18 @@ export default function Store() {
   return (
     <>
       <div className={styles.goodslist}>
-      <h1 className={styles.title}>商品一覧</h1>
+      <h1 className={styles.title}><span className={styles.Mid}>追跡</span><span className={styles.bot}>商品</span>一覧</h1>
       <hr/>
       <Link to='/post' className={styles.link}> ＋ </Link>
-        <ul>
+        <ul className={styles.urlbody}>
           {urls.map((url) => (
-            <li key={url.id} >
-              <h3>{url.title}</h3>
+            <li key={url.id} className={styles.urllist}>
+              <h3 className={styles.urltitle}>{url.title}</h3>
               <a href={url.url} target="_blank" rel="noopener noreferrer">
-                サイトへ行く
+                <GrAmazon size={35} className={styles.urlicon}/>
               </a>
-              <p>{url.price}円</p> 
-              <button onClick={() => handleDelete(url.id)}>削除</button>   
+              <p className={styles.urlprice}>{url.price}円</p> 
+              <button className={styles.urlbutton} onClick={() => handleDelete(url.id)}>✕</button>   
             </li>
           ))}
         </ul>

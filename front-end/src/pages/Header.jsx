@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import style from './Heder.module.css'
 import axios from 'axios'
-import { GoUnread } from "react-icons/go";
+import { FaEnvelope } from "react-icons/fa6";
 
 
 export default function Header(props) {
@@ -40,7 +40,7 @@ export default function Header(props) {
             </li>   
              <li className={style.buttonChi}>
                 <Link to='/mailbox'>
-                    <GoUnread className={style.mail} size={30}/>
+                    <FaEnvelope className={style.mail} size={30}/>
                 </Link>
              </li>
         </ul>

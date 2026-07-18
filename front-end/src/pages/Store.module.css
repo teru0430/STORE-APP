@@ -12,6 +12,7 @@
     min-width: 100px;
     max-width: auto;
     
+    
 }
 .goodslist{
   padding-top: 100px;
@@ -20,7 +21,17 @@
   background-position: center; 
   background-attachment: fixed;
   margin: 0;
-  height: 100vh;
+  min-height: 100vh; 
+  overflow: hidden; 
+}
+
+
+
+.Mid{
+  color:rgb(248, 132, 54);
+}
+.bot{
+  color:red
 }
 
 .link {
@@ -28,10 +39,11 @@
   justify-content: center; 
   align-items: center; 
   position: fixed;
-  margin-left: 10%;
+  margin-left: 15%;
+  margin-top: 5%;
   text-decoration: none;
-  color: white;
-  background-color: rgb(4, 73, 163);
+  color: rgb(133, 132, 132);
+  background-color: rgb(248, 228, 43);
   font-size: 46px;
   padding: 0;
   width: 100px; 
@@ -42,8 +54,73 @@
 }
 
 .link:hover {
-  background-color: rgb(2, 41, 92);
-  color: rgb(255, 255, 255);
+  background-color: rgb(223, 207, 65);
+  color: rgb(231, 231, 231);
+}
 
+.urlbody {
+  list-style: none;
+  background-color: rgb(241, 238, 238);
+  border-radius: 50px;
+  height: auto;
+  padding: 80px;
+  margin-left: 30%;
+  margin-right: 15%;
+  margin-bottom: 50px; 
+  
+}
 
+.urllist{
+  display: flex;
+  background-color: rgb(4, 73, 163);
+  border-radius: 40px;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  gap: 25px;
+  padding: 15px;
+  margin: 50px;
+  color: white;
+  width: 80%;
+  
+}
+
+.urltitle{
+  word-break: break-all;
+  max-width: 220px;
+  color: rgb(224, 224, 224);
+}
+
+.urlicon{
+  color:rgb(248, 132, 54);
+}
+.urlicon:hover {
+  color:rgb(148, 64, 8) ;
+}
+
+.urlprice {
+  color: rgb(251, 255, 0);
+  font-size:20px;
+  font-weight: bold;
+}
+.urlbutton{
+  background: none;
+  border: none;
+  padding: 23px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer; 
+  background-color: rgb(184, 52, 52);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.urlbutton:hover{
+  background-color:rgb(122, 3, 3);
+  color:white;
 }

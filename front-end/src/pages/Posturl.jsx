@@ -61,7 +61,7 @@ export default function Posturl() {
 
     <div className={style.formContainer}>
         <form onSubmit={(e) => handleSubmit(e)}>
-            <h1>価格追跡フォーム</h1>
+            <h1>価格追跡リスト</h1>
             <hr/>
             <div className={style.uiForm}>
               <div className={style.formField}>
