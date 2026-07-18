@@ -39,6 +39,7 @@ export default function Store() {
       <hr/>
       <Link to='/post' className={styles.link}> ＋ </Link>
         <ul className={styles.urlbody}>
+          <h2>{urls.length > 0? urls.length+'件の商品が登録されています':'好きな商品を追加してみよう'}</h2>
           {urls.map((url) => (
             <li key={url.id} className={styles.urllist}>
               <h3 className={styles.urltitle}>{url.title}</h3>
