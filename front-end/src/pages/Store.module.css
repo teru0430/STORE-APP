@@ -108,6 +108,7 @@ h2{
   color: rgb(251, 255, 0);
   font-size:20px;
   font-weight: bold;
+  letter-spacing: 0.1em;
 }
 .urlbutton{
   background: none;
@@ -129,4 +130,76 @@ h2{
 .urlbutton:hover{
   background-color:rgb(122, 3, 3);
   color:white;
+}
+
+.modal {
+  background-image: url('../assets/Game-background-material3.jpg');
+  background-size: cover;
+  border-radius: 40px;
+  align-items: center; 
+  display: flex;
+  justify-content: center; 
+  height: 40%;
+  margin-top: 20%;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.modal div {
+  display: flex;
+  flex-direction: column;
+  align-items:  center;
+  justify-content: space-evenly;
+}
+
+.modaltitle {
+  color: rgb(31, 58, 179);
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+.modaldel{
+  color : red;
+}
+.modalp{
+  margin-top: -10px;
+}
+
+.modalcancel{
+  background: none;
+  border: none;
+  cursor: pointer;
+  background-color: red;
+  color:white;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 20px;
+  margin-top: 30px;
+  margin-left: -70%;
+}
+.modalcancel:hover{
+  color:rgb(138, 138, 138);
+  background-color: rgb(94, 4, 4);
+}
+
+.modaldelbutton{
+  background: none;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(31, 58, 179);
+  color:white;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 20px;
+  margin-top: -46px;
+  margin-left: 65%;
+
+}
+.modaldelbutton:hover{
+  color:rgb(138, 138, 138);
+  background-color: rgb(6, 21, 87);
+
 }

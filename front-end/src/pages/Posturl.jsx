@@ -28,7 +28,7 @@ export default function Posturl() {
     const errorCount = Object.keys(errors).length;
     if (errorCount === 0) {
       try {
-        const response = await axios.post('http://localhost:8000/api/users/login/', formValues);
+        const response = await axios.post('http://localhost:8000/api/priceob/urls/', formValues);
         console.log('成功:', response.data);
         navigate('/');
         // 必要に応じてレスポンスの処理

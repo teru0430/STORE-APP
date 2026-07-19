@@ -4,8 +4,12 @@ import Image from '../assets/hurimesi.jpg'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { GrAmazon } from "react-icons/gr";
+import Modal from 'react-modal';
 
+Modal.setAppElement('#root'); 
 export default function Store() {
+  const [delUrl, setDelUrl] = useState({})
+  const [isOpen, setIsOpen] = useState(false);
   const [urls, setUrls] = useState([{id:1, title: "test", url: "test.com", price: 100},
                                     {id:2, title: "test2", url: "test.com", price: 450},
                                     {id:3, title: "test3", url: "test.com", price: 4450},
@@ -29,8 +33,35 @@ export default function Store() {
   }, []);
   console.log(urls)
   
-  const handleDelete = (id) => {
-    console.log('削除するID:', id);
+  const handleModal = (delid, deltitle) => {
+    console.log('削除するID:', delid);
+    setIsOpen(true);
+    setDelUrl({id:delid, title:deltitle})
+    console.log({id:delid, title:deltitle})
+  };
+
+  const closehandle = () =>{
+    setIsOpen(false);
+    setDelUrl({});
+  };
+
+  const deleteurl = async() => {
+    try{
+      const res = await axios.delete(`http://localhost:8000/api/priceob/urls/${delUrl.id}/`,null,{withCredentials: true})
+      console.log(res.status);
+      setIsOpen(false);
+      reloadurl(delUrl.id)
+      setDelUrl({});
+      
+      
+    }catch(error){
+      console.log(error)
+    };
+  };
+
+  const reloadurl = (id) =>{
+    const result = urls.filter(item => item.id !== id);
+    setUrls(result)
   };
   return (
     <>
@@ -47,11 +78,19 @@ export default function Store() {
                 <GrAmazon size={35} className={styles.urlicon}/>
               </a>
               <p className={styles.urlprice}>{url.price}円</p> 
-              <button className={styles.urlbutton} onClick={() => handleDelete(url.id)}>✕</button>   
+              <button className={styles.urlbutton} onClick={() => handleModal(url.id, url.title)}>✕</button>   
             </li>
           ))}
         </ul>
-      </div>    
+      </div> 
+      <Modal isOpen={isOpen} className={styles.modal}>
+        <div>
+          <h2><span className={styles.modaltitle}>{delUrl.title}</span>を本当に<span className={styles.modaldel}>削除</span>しますか？</h2>  
+          <p className={styles.modalp}>※復元はできません</p>
+          <button className={styles.modalcancel} onClick={() => closehandle()}>キャンセル</button> 
+          <button className={styles.modaldelbutton} onClick={() => deleteurl()}>削除</button>
+        </div>
+      </Modal>   
     </>
     
   )
