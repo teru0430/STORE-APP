@@ -127,3 +127,78 @@
     border-radius: 10px;
 
 }
+
+.modal {
+  background-image: url('../assets/Game-background-material3.jpg');
+  background-size: cover;
+  border-radius: 40px;
+  align-items: center; 
+  display: flex;
+  justify-content: center; 
+  height: 40%;
+  margin-top: 17%;
+  margin-left: 30%;
+  margin-right: 30%;
+  outline: none;
+}
+
+.modal h2{
+    justify-content: center;
+    display: flex;
+    margin-left: 2%;
+    margin-top: -10%;
+}
+
+.modal h2 span{
+    color:rgb(170, 25, 25);
+}
+
+.modal div {
+    justify-content: center;
+    display: flex;
+    position: fixed;
+    margin-left: -10%;
+    margin-top: 5%;
+    justify-content: space-evenly;
+    flex-direction: row;
+    white-space: nowrap;
+}
+
+.cancel{
+    border: none;
+    font-weight: bold;
+    cursor: pointer; 
+    background-color: rgb(172, 40, 40);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 50px;
+
+}
+
+.cancel:hover{
+  color:rgb(138, 138, 138);
+  background-color: rgb(94, 4, 4);
+}
+.modallogout{
+    border: none;
+    font-weight: bold;
+    cursor: pointer; 
+    background-color: rgb(27, 29, 194);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 50px;
+    margin-right: -80%;
+
+}
+
+.modallogout:hover{
+  color:rgb(138, 138, 138);
+  background-color: rgb(6, 21, 87);
+
+}

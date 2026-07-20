@@ -102,9 +102,9 @@ function App() {
       <Routes>
         <Route  path='/login' element={<Login api={api} setUser={setUser}/>} />
         <Route path='/register' element={<Register />} />
-        <Route path='/' element={<Store userID={user.id} />} />
+        <Route path='/' element={<Store user={user} />} />
         <Route path='/mailbox' element={<Mailbox />} />
-        <Route path='/post' element={<Posturl />} />
+        <Route path='/post' element={<Posturl  />} />
       </Routes>
     </BrowserRouter>
    
