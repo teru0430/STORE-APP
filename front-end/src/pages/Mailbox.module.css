@@ -1,5 +1,6 @@
 .mailboxbody{
     padding: 20%;
+    padding-top: 15%;
     background-image: url('../assets/Game-background-material3.jpg');
     background-size: cover;
     background-position: center; 
@@ -12,7 +13,7 @@
     background-color: rgb(235, 233, 233);
     border-radius: 50px;
     padding-top:10px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     margin-top: -10%;
     justify-content: center;
     align-items: center;
@@ -21,6 +22,7 @@
 
 .mailform ul {
     list-style: none;
+    
 }
 .mailform ul li{
     color:rgb(255, 255, 255);
@@ -50,3 +52,28 @@
 .urlicon:hover {
   color:rgb(148, 64, 8) ;
 }
+
+.upspan {
+    color: red;
+}
+
+.downspan {
+    color: aqua;
+}
+
+.title{
+    /* text-decoration: underline;
+    text-decoration-color: rgb(175, 41, 41); 
+    text-decoration-thickness: 2px; */
+    color:rgb(0, 0, 0);
+    
+}
+
+.price{
+    color:rgb(255, 209, 2)
+}
+
+.link {
+    margin-left: 40px;
+}
+

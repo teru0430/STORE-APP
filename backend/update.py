@@ -74,7 +74,7 @@ def update_price():
       
       update_pricedb(urlmodel, new_price)
       print('Price updated:', new_price)
-   msg = "testの価格が下がりました。test円 ---> test円"
+   msg = new_price
    add_msg(urlmodel, msg) 
    send_event(
             f"user-{urlmodel.user.id}",

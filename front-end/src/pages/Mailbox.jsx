@@ -19,8 +19,8 @@ export default function Mailbox() {
     UrlList();
     }, []);
     console.log(mails)
-    
 
+    
     return (
         <>
         <div className={style.mailboxbody}>
@@ -28,12 +28,12 @@ export default function Mailbox() {
                 <h1><span>メール</span>一覧</h1>
                 <ul>
                 {mails.map((mail)=>(
-                    <li key={mail.id} className={mail.message.includes('上') ? style.upprice : style.downprice}>
-                        {mail.message}
-                        <a href={mail.url.url} target="_blank" rel="noopener noreferrer">
+                    <li key={mail.id} className={Number(mail.message) > mail.url.price  ? style.upprice : style.downprice}>
+                        <span className={style.title}>{mail.url.title}</span>の値段が<span className={style.price}>{mail.url.price}円</span><span className={Number(mail.message) > mail.url.price  ? style.upspan : style.downspan}>ーーー＞</span><span className={style.price}>{mail.message}円</span>
+                        <a className={style.link} href={mail.url.url} target="_blank" rel="noopener noreferrer">
                             <GrAmazon size={35} className={style.urlicon}/>
                         </a>
-                        <button onClick={() => console.log(mail.id)}>!!</button>
+                       
                     </li>
                 ))}
                 </ul>
