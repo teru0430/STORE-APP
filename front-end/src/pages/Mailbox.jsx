@@ -26,10 +26,12 @@ export default function Mailbox() {
         <div className={style.mailboxbody}>
             <div className={style.mailform}>
                 <h1><span>メール</span>一覧</h1>
+                <p>※メールの期間は一週間です。</p>
+                <h3>{mails.length > 0 ? '': 'まだメールがありません'}</h3>
                 <ul>
                 {mails.map((mail)=>(
-                    <li key={mail.id} className={Number(mail.message) > mail.url.price  ? style.upprice : style.downprice}>
-                        <span className={style.title}>{mail.url.title}</span>の値段が<span className={style.price}>{mail.url.price}円</span><span className={Number(mail.message) > mail.url.price  ? style.upspan : style.downspan}>ーーー＞</span><span className={style.price}>{mail.message}円</span>
+                    <li key={mail.id} className={Number(mail.message) < mail.url.price  ? style.upprice : style.downprice}>
+                        <span className={style.title}>{mail.url.title}</span>の値段が<span className={style.price}>{mail.url.price}円</span><span className={Number(mail.message) < mail.url.price  ? style.upspan : style.downspan}>ーーー＞</span><span className={style.price}>{mail.message}円</span>
                         <a className={style.link} href={mail.url.url} target="_blank" rel="noopener noreferrer">
                             <GrAmazon size={35} className={style.urlicon}/>
                         </a>

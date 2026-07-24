@@ -10,7 +10,7 @@
 }
 
 .mailform{
-    background-color: rgb(235, 233, 233);
+    background-color: rgb(241, 241, 241);
     border-radius: 50px;
     padding-top:10px;
     padding-bottom: 40px;
@@ -25,7 +25,7 @@
     
 }
 .mailform ul li{
-    color:rgb(255, 255, 255);
+    color:rgb(185, 122, 27);
     font-weight: bold;
     border-radius: 20px;
     padding-top: 20px;
@@ -34,15 +34,15 @@
     margin-left: 15%;
     margin-right: 15%;
     font-size: 18px;
-    background-color: rgb(4, 73, 163);
+    background-color: rgba(4, 73, 163, 0);
 }
 
 .upprice{
-    outline: 0px solid rgb(4, 73, 163);
+    outline: 2px solid rgb(0, 0, 0);
 }
 
 .downprice{
-    outline: 8px solid rgb(230, 188, 5);
+    outline: 2px solid rgb(221, 184, 19);
 }
 
 .urlicon{
@@ -70,7 +70,7 @@
 }
 
 .price{
-    color:rgb(255, 209, 2)
+    color:rgb(204, 157, 3)
 }
 
 .link {

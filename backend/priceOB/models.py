@@ -27,7 +27,7 @@ class URLModel(models.Model):
 class MessageURLModel(models.Model):
     message = models.TextField()
     url = models.ForeignKey(to=URLModel, on_delete=models.CASCADE)
-    
+    created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return f'{self.message}の{self.url}メッセージ'

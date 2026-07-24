@@ -71,7 +71,7 @@ export default function Posturl() {
               <p className={style.errorMsg}>{formErrors.title}</p>
               <div className={style.formField}>
                 <label>URL</label>
-                <input type="text" placeholder='amazonURL' name="url" onChange={(e) => handleChange(e)}/>
+                <input type="text" placeholder='URL' name="url" onChange={(e) => handleChange(e)}/>
               </div>
               <p className={style.errorMsg}>{formErrors.url}</p>
               <p className={style.errorMsg}>{formErrors.apiError}</p>

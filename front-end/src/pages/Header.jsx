@@ -1,5 +1,5 @@
 import React, { cache, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import style from './Heder.module.css'
 import axios from 'axios'
 import { FaEnvelope } from "react-icons/fa6";
@@ -8,6 +8,7 @@ import Modal from 'react-modal';
 
 export default function Header(props) {
     axios.defaults.withCredentials = true
+    const navigate = useNavigate();
     const {user, setUser} = props;
     const [isOpen, setOpen] = useState(false);
     let ref = true
@@ -17,6 +18,7 @@ export default function Header(props) {
             console.log(res.status);
             setUser({});
             setOpen(false);
+            navigate('/login')
             
         }catch(error){
             console.log('error',error);

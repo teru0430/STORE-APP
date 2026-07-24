@@ -149,6 +149,7 @@ def amazon_tarack_price(url):
 def check_event():
    one_week_ago = timezone.now() - timedelta(days=7)
    Event.objects.filter(created__lt=one_week_ago).delete()
+   MessageURLModel.objects.filter(created_at__lt=one_week_ago).delete()
     
   
    

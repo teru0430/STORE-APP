@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import style from './Login.module.css'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login(props) {
   const {api, setUser} = props;
@@ -62,7 +62,7 @@ export default function Login(props) {
     }
     return errors;
   };
-
+  
 
   return (
 
@@ -84,8 +84,9 @@ export default function Login(props) {
               <p className={style.errorMsg}>{formErrors.apiError}</p>
               <button className='submitButton'>ログイン</button>
             </div>
-
+          <Link to='/register'>アカウント作成はこちら</Link>
         </form>
+        
     </div>
   );
 }
