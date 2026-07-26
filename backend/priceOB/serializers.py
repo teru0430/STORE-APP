@@ -28,7 +28,7 @@ class MessageURLModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MessageURLModel
-        fields = ['id', 'message', 'url']
+        fields = ['id', 'message', 'url', 'is_read']
         read_only_fields = ['id']
 
 
@@ -37,7 +37,10 @@ class MailBoxSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MailBox
-        fields = ['msg_url']
+        fields = ['id','msg_url']
+    
+    
+
     
 
     

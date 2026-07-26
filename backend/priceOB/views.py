@@ -85,6 +85,13 @@ class MailBoxViewSet(viewsets.ModelViewSet):
         """ユーザーの自分のMailBoxのみを表示"""
         return MailBox.objects.filter(user=self.request.user)
     
+    def perform_update(self, serializer):
+        mailbox = serializer.save()
+        pk = self.request.data.get('pk')
+        mailbox.msg_url.filter(id=pk).update(is_read=True)
+        
+        
+    
     
    
 
