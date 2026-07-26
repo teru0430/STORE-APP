@@ -2,10 +2,8 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django_eventstream import send_event
 from .models import URLModel, MailBox, MessageURLModel
 from .serializers import URLModelSerializer, MailBoxSerializer
-from django_eventstream.views import events
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from users.models import CustomUser
 from rest_framework.authentication import SessionAuthentication
@@ -32,16 +30,7 @@ class URLModelViewSet(viewsets.ModelViewSet):
         if response.status_code == 201:
             user_channel = f"user-{request.user.id}"
             print("send_event called", user_channel, "event_type=", "url_created")
-            send_event(
-                user_channel,
-                "url_created",
-                {
-                    "id": response.data['id'],
-                    "title": response.data['title'],
-                    "url": response.data['url'],
-                    "message": "新しいURLが追加されました"
-                }
-            )
+            
         
         return response
 
@@ -63,15 +52,7 @@ class URLModelViewSet(viewsets.ModelViewSet):
         if response.status_code == 204:
             user_channel = f"user-{request.user.id}"
             print("send_event called", user_channel, "event_type=", "url_deleted")
-            send_event(
-                user_channel,
-                "url_deleted",
-                {
-                    "id": url_id,
-                    "title": url_title,
-                    "message": "URLが削除されました"
-                }
-            )
+            
 
         return response
     

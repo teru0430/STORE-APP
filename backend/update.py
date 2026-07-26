@@ -8,8 +8,6 @@ from bs4 import BeautifulSoup
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from priceOB.models import URLModel, MessageURLModel, MailBox
-from django_eventstream import send_event
-from django_eventstream.models import Event
 from channels.db import database_sync_to_async
 import random
 
@@ -45,48 +43,11 @@ def update_price():
       return
    print('new_price:',new_price)
    if new_price != urlmodel.price:
-      if new_price < urlmodel.price:
-         msg = f"{urlmodel.title}の価格が下がりました。古い価格は{urlmodel.price}円、新しい価格は{new_price}円です。"
-         send_event(
-            f"user-{urlmodel.user.id}",
-            "price_down",
-            {
-               "id": urlmodel.id,
-               "title": urlmodel.title,
-               "url": urlmodel.url,
-               "new_price": new_price,
-               "message": msg
-            }
-         )
-      else:
-         msg = f"{urlmodel.title}の価格が上がりました。古い価格は{urlmodel.price}円、新しい価格は{new_price}円です。"
-         send_event(
-            f"user-{urlmodel.user.id}",
-            "price_updated",
-            {
-               "id": urlmodel.id,
-               "title": urlmodel.title,
-               "url": urlmodel.url,
-               "new_price": new_price,
-               "message": msg
-            }
-         )
-      
       update_pricedb(urlmodel, new_price)
       print('Price updated:', new_price)
    msg = new_price
    add_msg(urlmodel, msg) 
-   send_event(
-            f"user-{urlmodel.user.id}",
-            "price_down",
-            {
-               "id": urlmodel.id,
-               "title": urlmodel.title,
-               "url": urlmodel.url,
-               "new_price": new_price,
-               "message": msg
-            }
-         )  
+     
    global count
    count +=1
    print('Update!',count)
@@ -148,7 +109,6 @@ def amazon_tarack_price(url):
 
 def check_event():
    one_week_ago = timezone.now() - timedelta(days=7)
-   Event.objects.filter(created__lt=one_week_ago).delete()
    MessageURLModel.objects.filter(created_at__lt=one_week_ago).delete()
     
   

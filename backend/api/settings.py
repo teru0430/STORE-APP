@@ -32,8 +32,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "daphne",
-    "django_eventstream",
     "corsheaders",
     'rest_framework_simplejwt.token_blacklist',
     'rest_framework_simplejwt',
@@ -82,7 +80,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'api.wsgi.application'
 
-ASGI_APPLICATION = "api.asgi.application"
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -142,12 +140,8 @@ REST_FRAMEWORK = {
     
         'users.authentication.CookieJWTAuthentication',
     ],
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
-        'django_eventstream.renderers.SSEEventRenderer', 
-        'django_eventstream.renderers.BrowsableAPIEventStreamRenderer', 
-    ],
+     
+    
 
 }
 
@@ -164,5 +158,4 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 
-EVENTSTREAM_STORAGE_CLASS = 'django_eventstream.storage.DjangoModelStorage'
-EVENTSTREAM_CHANNELMANAGER_CLASS = 'priceOB.channelmanager.UserChannelManager'
+
