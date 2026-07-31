@@ -35,14 +35,17 @@
     margin-right: 15%;
     font-size: 18px;
     background-color: rgba(4, 73, 163, 0);
+    
 }
 
 .upprice{
-    outline: 2px solid rgb(0, 0, 0);
+    outline: 2px solid rgb(204, 77, 77);
+    
 }
 
 .downprice{
     outline: 2px solid rgb(221, 184, 19);
+    
 }
 
 .urlicon{
@@ -77,3 +80,11 @@
     margin-left: 40px;
 }
 
+.isread{ 
+  color:red;
+  border-radius: 100%; 
+  font-size: 12px;
+  margin-right: 5px;
+  cursor: pointer;
+  caret-color: transparent;
+}

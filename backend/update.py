@@ -2,14 +2,11 @@
 from django.utils import timezone
 from datetime import timedelta
 import requests
-import asyncio
-import time
 from bs4 import BeautifulSoup
 from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from priceOB.models import URLModel, MessageURLModel, MailBox
-from channels.db import database_sync_to_async
 import random
+from django.db import transaction, connection 
 
 count = 0
 def add_msg(url, msg):
@@ -31,28 +28,32 @@ def update_price():
    """
    This function is called by start() below
    """
-   urlmodel = URLModel.objects.order_by('last_scraped_at').first()
-   if not urlmodel:
-       print("No URLs to update.")
-       return
+   connection.close()
+   with transaction.atomic():
+      urlmodel = URLModel.objects.order_by('last_scraped_at').first()
+      if not urlmodel:
+         print("No URLs to update.")
+         urlmodel.last_scraped_at = timezone.now()
+         urlmodel.save()
+         return
 
-   print('url:',urlmodel.url)
-   print('title:',urlmodel.title)
-   new_price = amazon_tarack_price(urlmodel.url)
-   if new_price is None:
-      return
-   print('new_price:',new_price)
-   if new_price != urlmodel.price:
-      update_pricedb(urlmodel, new_price)
-      print('Price updated:', new_price)
-   msg = new_price
-   add_msg(urlmodel, msg) 
-     
-   global count
-   count +=1
-   print('Update!',count)
-   urlmodel.last_scraped_at = timezone.now()
-   urlmodel.save()
+      print('url:',urlmodel.url)
+      print('title:',urlmodel.title)
+      new_price = amazon_tarack_price(urlmodel.url)
+      if new_price is None:
+         return
+      print('old', urlmodel.price)
+      print('new_price:',new_price)
+      if new_price != urlmodel.price:
+         update_pricedb(urlmodel, new_price)
+         print('Price updated:', new_price)
+         add_msg(urlmodel,new_price) 
+      
+      global count
+      count +=1
+      print('Update!',count)
+      urlmodel.last_scraped_at = timezone.now()
+      urlmodel.save()
 
 
 def amazon_tarack_price(url):

@@ -9,6 +9,7 @@
     flex-direction: row;
     white-space: nowrap;
     z-index: 999;
+    
 }
 
 
@@ -119,6 +120,7 @@
     margin-top: -7px;
     padding: 6px;
     cursor: pointer;
+    
 }
 
 .mail:hover {
@@ -201,4 +203,16 @@
   color:rgb(138, 138, 138);
   background-color: rgb(6, 21, 87);
 
+}
+
+.isread{
+    color:red;
+    margin-left: -14px;
+    vertical-align: top;
+    text-decoration: none; 
+    font-size: 12px;
+    margin-right: 10px;
+    display: inline-block; /* 必須 */
+    line-height: 8px;        /* 文字の上下余白をゼロにする */
+    
 }

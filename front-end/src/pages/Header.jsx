@@ -1,4 +1,4 @@
-import React, { cache, useState } from 'react'
+import React, { cache, useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import style from './Heder.module.css'
 import axios from 'axios'
@@ -9,9 +9,20 @@ import Modal from 'react-modal';
 export default function Header(props) {
     axios.defaults.withCredentials = true
     const navigate = useNavigate();
-    const {user, setUser} = props;
+    const {user, setUser, mails} = props;
     const [isOpen, setOpen] = useState(false);
+    const [isread, setisread] = useState(false);
     let ref = true
+    useEffect(() => {
+        setisread(false)
+        mails.map(item => {
+            if(!item.is_read){
+                setisread(true)
+
+            };
+        });
+
+    },[mails]);
     const handleSubmit = async() =>{
         try{
             const res = await axios.post('http://localhost:8000/api/users/logout/' ,null,{withCredentials: true})
@@ -53,7 +64,9 @@ export default function Header(props) {
              <li className={style.buttonChi}>
                 <Link to='/mailbox'>
                     <FaEnvelope className={style.mail} size={30}/>
+                    {isread ? <span className={style.isread}>●</span>:''}
                 </Link>
+                
              </li>
         </ul>
       </div>
