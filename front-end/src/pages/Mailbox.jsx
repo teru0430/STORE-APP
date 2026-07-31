@@ -38,9 +38,9 @@ export default function Mailbox(props) {
                 <h3>{mails.length > 0 ? '': 'まだメールがありません'}</h3>
                 <ul>
                 {mails.map((mail)=>(
-                    <li key={mail.id} className={Number(mail.message) > mail.url.price  ? style.upprice : style.downprice}>
+                    <li key={mail.id} className={Number(mail.message) < mail.url.price  ? style.upprice : style.downprice}>
                         {!mail.is_read ? <span className={style.isread} onClick={()=> handleclick(mail.id)}>●</span>:''}
-                        <span className={style.title}>{mail.url.title}</span>の値段が<span className={style.price}>{mail.url.price}円</span><span className={Number(mail.message) > mail.url.price  ? style.upspan : style.downspan}>ーーー＞</span><span className={style.price}>{mail.message}円</span>
+                        <span className={style.title}>{mail.url.title}</span>の値段が<span className={style.price}>{mail.message}円</span><span className={Number(mail.message) < mail.url.price  ? style.upspan : style.downspan}>ーーー＞</span><span className={style.price}>{mail.url.price}円</span>
                         <a className={style.link} href={mail.url.url} target="_blank" rel="noopener noreferrer">
                             <GrAmazon size={35} className={style.urlicon}/>
                         </a>

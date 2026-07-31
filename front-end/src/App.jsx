@@ -59,6 +59,9 @@ function App() {
     Callapi();
     UrlList();
   },[])
+  useEffect(() => {
+    UrlList();
+  },[user])
   console.log(user,typeof user.id)
   console.log(mails)
   

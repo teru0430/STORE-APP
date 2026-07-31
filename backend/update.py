@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from apscheduler.schedulers.background import BackgroundScheduler
 from priceOB.models import URLModel, MessageURLModel, MailBox
 import random
-from django.db import transaction, connection 
+from django.db import transaction
 
 count = 0
 def add_msg(url, msg):
@@ -23,15 +23,16 @@ def update_pricedb(url, new_price):
    obj = URLModel.objects.get(id=url.id)
    obj.price = new_price
    obj.save()
+   print('dbupdate')
 
 def update_price():
    """
    This function is called by start() below
    """
-   connection.close()
+   
    with transaction.atomic():
       urlmodel = URLModel.objects.order_by('last_scraped_at').first()
-      if not urlmodel:
+      if urlmodel is None:
          print("No URLs to update.")
          urlmodel.last_scraped_at = timezone.now()
          urlmodel.save()
@@ -45,16 +46,17 @@ def update_price():
       print('old', urlmodel.price)
       print('new_price:',new_price)
       if new_price != urlmodel.price:
-         update_pricedb(urlmodel, new_price)
+         # update_pricedb(urlmodel, new_price)
          print('Price updated:', new_price)
-         add_msg(urlmodel,new_price) 
+         add_msg(urlmodel,urlmodel.price) 
       
       global count
       count +=1
       print('Update!',count)
       urlmodel.last_scraped_at = timezone.now()
+      urlmodel.price = new_price
       urlmodel.save()
-
+   
 
 def amazon_tarack_price(url):
    # amazonURL = url
