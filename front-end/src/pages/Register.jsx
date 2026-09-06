@@ -36,7 +36,7 @@ export default function Register() {
         // 必要に応じてレスポンスの処理
       } catch (error) {
         console.error('失敗:', error);
-        setFormErrors({ apiError: 'ログインに失敗しました。メールアドレスまたはパスワードを確認してください。' });
+        setFormErrors({ apiError: '登録に失敗しました。メールアドレスまたはパスワードを確認してください。' });
       }
       // Callapi()  
       

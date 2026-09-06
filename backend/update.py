@@ -112,6 +112,6 @@ def start():
    """
    scheduler = BackgroundScheduler()
    
-   scheduler.add_job(update_price, 'interval', seconds=60, max_instances=1, coalesce=True) # schedule args=[i]
-   scheduler.add_job(check_event, 'interval', seconds=60) # schedule args=[i] days=1
+   scheduler.add_job(update_price, 'interval', seconds=300, max_instances=1, coalesce=True) # schedule args=[i]
+   scheduler.add_job(check_event, 'interval', days=1) # schedule args=[i] days=1
    scheduler.start()
