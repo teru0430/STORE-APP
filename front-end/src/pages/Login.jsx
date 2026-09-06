@@ -78,7 +78,7 @@ export default function Login(props) {
               <p className={style.errorMsg}>{formErrors.username}</p>
               <div className={style.formField}>
                 <label>パスワード</label>
-                <input type="password" placeholder='パスワード' name="password" onChange={(e) => handleChange(e)}/>
+                <input type="text" placeholder='パスワード' name="password" onChange={(e) => handleChange(e)}/>
               </div>
               <p className={style.errorMsg}>{formErrors.password}</p>
               <p className={style.errorMsg}>{formErrors.apiError}</p>
