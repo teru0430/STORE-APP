@@ -12,11 +12,11 @@
 
 
 # サイトの紹介動画
-[![紹介動画]](https://youtu.be/aHRu-CvWiVw)
+[[紹介動画]](https://youtu.be/aHRu-CvWiVw)
 
 
 # 商品の消去、ログアウトでは確認画面が出ます
-[![削除、ログアウト画面]](https://youtu.be/sf_OmxNkJGk)
+[[削除、ログアウト画面]](https://youtu.be/sf_OmxNkJGk)
 
 
 
