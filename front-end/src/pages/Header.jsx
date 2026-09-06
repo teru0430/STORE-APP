@@ -48,7 +48,7 @@ export default function Header(props) {
     return (
     <>
       <div className={style.hederCss}>
-        <h3 className={style.htitle}>Arai Games</h3>
+        <h3 className={style.htitle}>新井 ポートフォリオ</h3>
         <ul className={style.button}>
             {user?.username?(<div className={style.userspace}>{user.username}</div>):<div className={style.nouser}></div>}
             

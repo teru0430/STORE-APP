@@ -212,7 +212,7 @@
     text-decoration: none; 
     font-size: 12px;
     margin-right: 10px;
-    display: inline-block; /* 必須 */
-    line-height: 8px;        /* 文字の上下余白をゼロにする */
+    display: inline-block; 
+    line-height: 8px;       
     
 }
