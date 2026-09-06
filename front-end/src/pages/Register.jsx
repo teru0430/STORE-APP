@@ -32,7 +32,7 @@ export default function Register() {
       try {
         const response = await axios.post('http://localhost:8000/api/users/register/', formValues);
         console.log('成功:', response.data);
-        navigate('/');
+        navigate('/login');
         // 必要に応じてレスポンスの処理
       } catch (error) {
         console.error('失敗:', error);
