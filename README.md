@@ -20,5 +20,5 @@
 
 
 
-# 値段が変わった時の通知例↓
+# 値段が変わった時の通知例
 <img width="1911" height="984" alt="Image" src="https://github.com/user-attachments/assets/5297f820-9251-42a5-bf72-ad874b58e2d6" />
